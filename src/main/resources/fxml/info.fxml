@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.InfoController">
+  <children>
+    <Label fx:id="nameLabel" alignment="TOP_LEFT" layoutX="280.0" layoutY="29.0" prefHeight="100.00009999999747" prefWidth="306.0" text="Dan Brown">
+      <font>
+        <Font name="Times New Roman" size="40.0" />
+      </font>
+    </Label>
+    <ImageView fx:id="photoView" fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+    <Label layoutX="31.0" layoutY="222.0" text="PERSONAL INFORMATION">
+      <font>
+        <Font name="Times New Roman" size="20.0" fx:id="x2" />
+      </font>
+    </Label>
+    <Label layoutX="62.0" layoutY="259.0" text="BIRTH DATE">
+      <font>
+        <Font name="Times New Roman" size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="62.0" layoutY="290.0" text="CITY" />
+    <Label font="$x1" layoutX="62.0" layoutY="319.0" text="PHONE NUMBER" />
+    <Label font="$x1" layoutX="62.0" layoutY="350.0" text="EMAIL" />
+    <Label font="$x2" layoutX="31.0" layoutY="391.0" text="APPLICANT INFORMATION" />
+    <Label font="$x1" layoutX="58.0" layoutY="430.0" text="CREATION DATE" />
+    <Label font="$x1" layoutX="58.0" layoutY="460.0" text="UNIVERSITY" />
+    <Label font="$x1" layoutX="58.0" layoutY="490.0" text="PLACE" />
+    <Label font="$x1" layoutX="58.0" layoutY="520.0" text="REASON" />
+    <Label fx:id="birthDateLabel" font="$x1" layoutX="241.0" layoutY="256.0" text="Label" />
+    <Label fx:id="cityLabel" font="$x1" layoutX="241.0" layoutY="287.0" text="Label" />
+    <Label fx:id="phoneNumberLabel" font="$x1" layoutX="241.0" layoutY="316.0" text="Label" />
+    <Label fx:id="emailLabel" font="$x1" layoutX="241.0" layoutY="350.0" text="Label" />
+    <Label fx:id="creationDateLabel" font="$x1" layoutX="241.0" layoutY="421.0" text="Label" />
+    <Label fx:id="universityLabel" font="$x1" layoutX="241.0" layoutY="455.0" text="Label" />
+    <Label fx:id="placeLabel" font="$x1" layoutX="241.0" layoutY="490.0" text="Label" />
+    <Label fx:id="reasonLabel" alignment="TOP_LEFT" font="$x1" layoutX="241.0" layoutY="522.0" prefHeight="100.0" prefWidth="306.0" text="Label" textAlignment="LEFT" underline="false" wrapText="false" />
+    <Button font="$x1" layoutX="248.0" layoutY="642.0" mnemonicParsing="false" onAction="#attendAction" prefHeight="32.0" prefWidth="104.0" text="ATTEND" />
+  </children>
+</AnchorPane>
