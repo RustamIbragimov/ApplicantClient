@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
 import model.Client;
@@ -77,10 +78,11 @@ public class SearcherController implements Initializable {
         try {
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/info.fxml"));
-            Scene scene = new Scene(root, 600, 700);
+            Scene scene = new Scene(root, 800, 700);
             stage.setScene(scene);
             stage.centerOnScreen();
-            stage.setTitle("Applicant Client");
+            stage.setTitle(person.getName());
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.show();
         }
