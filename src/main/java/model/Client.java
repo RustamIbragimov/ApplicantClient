@@ -18,6 +18,7 @@ public class Client {
 
     final private static byte SEARCH_BY_NUMBER = 1;
     final private static byte ATTENDANCE = 2;
+    final private static byte PHOTO = 3;
 
     public Client() {}
 
@@ -67,6 +68,10 @@ public class Client {
 
         out.writeInt(bytes.length);
         out.write(bytes);
+    }
+
+    public void updatePhoto(Person person) {
+
     }
 
 

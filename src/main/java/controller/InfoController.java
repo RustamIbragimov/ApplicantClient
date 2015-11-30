@@ -13,8 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Client;
 import model.Person;
+import model.SerializableImage;
 
 import java.awt.*;
 import java.io.IOException;
@@ -62,10 +64,35 @@ public class InfoController implements Initializable {
     public void attendAction() {
         try {
             Client.getInstance().setAttended(phoneNumberLabel.getText());
+            Client.getInstance().updatePhoto(person);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void createPhotoScene() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/photo.fxml"));
+        Scene scene = new Scene(root, 600, 400);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.setTitle("Take a photo");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setResizable(false);
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent event) {
+                SerializableImage photo = PhotoController.photo;
+                if (photo != null) {
+                    Image image = photo.getImage();
+                    photoView.setImage(image);
+                }
+            }
+        });
+
+        stage.show();
     }
 
 
@@ -84,12 +111,12 @@ public class InfoController implements Initializable {
         placeLabel.setText(person.getPlace());
         reasonLabel.setText(person.getReason());
 
-        if (person.getImage() == null) {
+        if (person.getPhoto() == null) {
             Image image = new Image("/images/no-image-available.gif");
             photoView.setImage(image);
         }
         else {
-            photoView.setImage(person.getImage());
+            photoView.setImage(person.getPhoto().getImage());
         }
 
         photoView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -101,15 +128,7 @@ public class InfoController implements Initializable {
                         PhotoController.webcam.open(true);
                     }
 
-                    Stage stage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/fxml/photo.fxml"));
-                    Scene scene = new Scene(root, 600, 400);
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
-                    stage.setTitle("Take a photo");
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setResizable(false);
-                    stage.show();
+                    createPhotoScene();
                 }
                 catch (IOException e) {
                     e.printStackTrace();

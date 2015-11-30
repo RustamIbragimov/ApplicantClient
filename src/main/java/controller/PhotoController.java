@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.SerializableImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,6 +27,13 @@ public class PhotoController implements Initializable {
     ImageView photoView;
 
     public static Webcam webcam;
+    public static SerializableImage photo;
+
+    public void photoAction() {
+        BufferedImage image = webcam.getImage();
+        Image img = SwingFXUtils.toFXImage(image, null);
+        photo = new SerializableImage(img);
+    }
 
     private void liveImage() {
         while (true) {
@@ -47,6 +55,8 @@ public class PhotoController implements Initializable {
                 return null;
             }
         };
-        new Thread(task).start();
+        Thread t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
     }
 }
