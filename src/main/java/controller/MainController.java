@@ -2,6 +2,7 @@ package controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import main.Main;
 import model.Client;
 import model.Person;
@@ -55,6 +57,17 @@ public class MainController implements Initializable {
             stage.centerOnScreen();
             stage.setTitle("Applicant Client");
             stage.setResizable(false);
+
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent event) {
+                    try {
+                        Client.getInstance().exit();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             Main.getStage().close();
             stage.show();
         }

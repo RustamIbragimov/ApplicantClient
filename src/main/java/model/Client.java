@@ -13,9 +13,10 @@ public class Client {
     private static String ipAddress;
     private static Client instance = new Client();
     private static Socket socket;
-    private static DataInputStream in;
-    private static DataOutput out;
+    private static ObjectInputStream in;
+    private static ObjectOutputStream out;
 
+    final private static byte EXIT = 0;
     final private static byte SEARCH_BY_NUMBER = 1;
     final private static byte ATTENDANCE = 2;
     final private static byte PHOTO = 3;
@@ -27,8 +28,8 @@ public class Client {
         this.ipAddress = ipAddress;
         connectToServer();
         try {
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,55 +42,46 @@ public class Client {
         catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public List<Person> getByNumber(String number) throws IOException {
-        byte[] temp = Serializer.serialize(number);
-        byte[] bytes = new byte[temp.length + 1];
-        bytes[0] = SEARCH_BY_NUMBER;
-        for (int i = 1; i < bytes.length; i++) {
-            bytes[i] = temp[i - 1];
-        }
-
-        out.writeInt(bytes.length);
-        out.write(bytes);
+        sendRequest(number, SEARCH_BY_NUMBER);
 
         List<Person> list = getList();
         return list;
     }
 
     public void setAttended(String number) throws IOException {
-        byte[] temp = Serializer.serialize(number);
-        byte[] bytes = new byte[temp.length + 1];
-        bytes[0] = ATTENDANCE;
-        for (int i = 1; i < bytes.length; i++) {
-            bytes[i] = temp[i - 1];
-        }
-
-        out.writeInt(bytes.length);
-        out.write(bytes);
+        sendRequest(number, ATTENDANCE);
     }
 
-    public void updatePhoto(Person person) {
+    public void updatePhoto(Person person) throws IOException{
+        sendRequest(person, PHOTO);
+    }
 
+    public void sendRequest(Object obj, byte type) throws IOException {
+        out.writeByte(type);
+        out.writeObject(obj);
+    }
+
+    public void exit() throws IOException {
+        out.writeByte(EXIT);
+        out.writeObject(new Object());
+
+        in.close();
+        out.close();
     }
 
 
-
+    @SuppressWarnings("unchecked")
     private static List<Person> getList() {
         List<Person> list = null;
         try {
-            int length = in.readInt();
-            if (length > 0) {
-                byte[] bytes = new byte[length];
-                in.readFully(bytes, 0, bytes.length);
-                list = (LinkedList<Person>) Serializer.deserialize(bytes);
-            }
-        }
-        catch (IOException e) {
+            list = (LinkedList<Person>) in.readObject();
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return list;

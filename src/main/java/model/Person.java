@@ -125,7 +125,7 @@ public class Person implements Serializable {
         return photo;
     }
 
-    public void setPhoto(Image image) {
+    public void setPhoto(SerializableImage photo) {
         this.photo = photo;
     }
 

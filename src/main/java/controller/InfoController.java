@@ -1,6 +1,7 @@
 package controller;
 
 import com.github.sarxos.webcam.Webcam;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -88,6 +89,7 @@ public class InfoController implements Initializable {
                 if (photo != null) {
                     Image image = photo.getImage();
                     photoView.setImage(image);
+                    person.setPhoto(photo);
                 }
             }
         });
@@ -122,12 +124,6 @@ public class InfoController implements Initializable {
         photoView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 try {
-                    if (PhotoController.webcam == null) {
-                        PhotoController.webcam = Webcam.getDefault();
-                        PhotoController.webcam.setViewSize(new Dimension(640, 480));
-                        PhotoController.webcam.open(true);
-                    }
-
                     createPhotoScene();
                 }
                 catch (IOException e) {
@@ -135,5 +131,21 @@ public class InfoController implements Initializable {
                 }
             }
         });
+
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                if (PhotoController.webcam == null) {
+                    PhotoController.webcam = Webcam.getDefault();
+                    PhotoController.webcam.setViewSize(new Dimension(640, 480));
+                    PhotoController.webcam.open(true);
+                }
+                return null;
+            }
+        };
+        Thread t = new Thread(task);
+        t.setDaemon(true);
+        t.start();
     }
 }
