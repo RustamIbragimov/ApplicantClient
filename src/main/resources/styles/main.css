@@ -1,0 +1,35 @@
+.pane {
+    -fx-background-image: url("/images/nature-main.jpg");
+    -fx-background-size: 500px 300px;
+}
+
+.label {
+    -fx-font-family: serif;
+    -fx-font-size: 30px;
+}
+
+.port-text-field, .ip-text-field {
+    -fx-padding: 12px 80px 12px 15px;
+    -fx-prompt-text-fill: gray;
+    -fx-font-family: serif;
+    -fx-font-size: 20px;
+}
+
+.button {
+    -fx-background-color:#44c767;
+    -fx-display:inline-block;
+    -fx-color:#ffffff;
+    -fx-cursor: hand;
+    -fx-font-family:Arial;
+    -fx-font-size:20px;
+    -fx-padding:12px 80px;
+    -fx-text-decoration:none;
+}
+
+.button:hover {
+    -fx-background-color: #6dbf2a;
+}
+.button:pressed {
+    -fx-position:relative;
+    -fx-top:1px;
+}

@@ -58,6 +58,8 @@ public class SearcherController implements Initializable {
             button.setMaxHeight(70);
             button.setMinHeight(70);
 
+            button.getStyleClass().add("person-button");
+
             button.setOnAction(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     Button clickedButton = (Button) event.getSource();

@@ -67,7 +67,7 @@ public class Client {
 
     public void exit() throws IOException {
         out.writeByte(EXIT);
-        out.writeObject(new Object());
+        out.writeObject(new int[10]);
 
         in.close();
         out.close();

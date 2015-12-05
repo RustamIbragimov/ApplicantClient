@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -9,20 +10,27 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.SearcherController">
   <children>
-    <TextField fx:id="searchTextField" layoutX="65.0" layoutY="93.0" prefHeight="29.0" prefWidth="278.0" promptText="" />
-    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@../images/AIESEC-New-Logo1.png" />
-      </image>
-    </ImageView>
-    <ScrollPane layoutX="14.0" layoutY="136.0" prefHeight="451.0" prefWidth="379.0">
+    <ScrollPane hbarPolicy="NEVER" layoutX="-15.0" layoutY="137.0" prefHeight="451.0" prefWidth="437.0" vbarPolicy="AS_NEEDED">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="372.0">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="437.0" styleClass="scroll-pane">
           <children>
-            <VBox fx:id="vBox" prefHeight="435.0" prefWidth="372.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox fx:id="vBox" prefHeight="435.0" prefWidth="372.0" spacing="10.0" styleClass="v-box" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-1.0" />
           </children>
         </AnchorPane>
       </content>
     </ScrollPane>
+    <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="127.0" prefWidth="458.0" styleClass="upper-pane">
+      <children>
+        <TextField fx:id="searchTextField" layoutX="50.0" layoutY="79.0" prefHeight="35.56263732910156" prefWidth="307.0" promptText="" styleClass="search-text-field" />
+        <ImageView fitHeight="35.56264180296264" fitWidth="306.9999694824219" layoutX="50.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@../images/aiesec-logo.png" />
+          </image>
+        </ImageView>
+      </children>
+    </AnchorPane>
   </children>
+  <stylesheets>
+    <URL value="@../styles/searcher.css" />
+  </stylesheets>
 </AnchorPane>
